@@ -2,13 +2,13 @@ replicaCount: 1
 
 image:
   pactImageRepository: pactfoundation/pact-broker
-  pactImageTag: 2.32.0-2
+  pactImageTag: 2.61.0.0
   pullPolicy: IfNotPresent
 
 service:
   name: pact-broker
   type: ClusterIP
-  externalPort: 80
+  externalPort: 9292
   internalPort: 9292
   annotations:
     fabric8.io/expose: "true"
@@ -23,9 +23,10 @@ postgresql:
   ## Set to false if bringing your own PostgreSQL.
   ##
   enabled: true
-  postgresUser: pactbroker
-  postgresPassword: pactbroker
-  postgresDatabase: pactbroker
+  postgresqlUsername: pactbroker
+  postgresqlPassword: pactbroker
+  postgresqlDatabase: pactbroker
+
 
   persistence:
     ## Enable PostgreSQL persistence using Persistent Volume Claims.
