@@ -1,11 +1,12 @@
 {{- if .Values.ingress.enabled -}}
  
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1beta1 
 kind: Ingress
 metadata:
   name: {{ template "pact-broker.fullname" . }}
   labels:
-{{ include "pact-broker.labels" . | indent 4 }}
+    draft: {{ default "draft-app" .Values.draft }}
+    app: "{{ .Chart.Name | replace "-" "_" }}"
   {{- with .Values.ingress.annotations }}
   annotations:
     {{- toYaml . | nindent 4 }}
@@ -29,14 +30,8 @@ spec:
         {{- range .paths }}
           - path: {{ . }}
             backend:
-              serviceName: {{ template "pact-broker.fullname" . }}
+              serviceName: pact-broker
               servicePort: http
         {{- end }}
   {{- end }}
-  
 {{- end }}
-
-
-
- 
- 

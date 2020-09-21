@@ -8,7 +8,7 @@ image:
 service:
   name: pact-broker
   type: ClusterIP
-  externalPort: 9292
+  externalPort: 80
   internalPort: 9292
   annotations:
     fabric8.io/expose: "true"
@@ -40,13 +40,14 @@ persistence:
 
 
 ingress:
-  enabled: false
-  annotations: {}
-    # kubernetes.io/ingress.class: nginx
-    # kubernetes.io/tls-acme: "true"
+  enabled: true
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    kubernetes.io/tls-acme: "true"
   hosts:
     - host: pact-broker.local
-      paths: []
+      paths: 
+        - "/"
 
   tls: []
   #  - secretName: pact-broker-tls
