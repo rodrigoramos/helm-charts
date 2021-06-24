@@ -36,7 +36,7 @@ spec:
             - name: PACT_BROKER_DATABASE_PASSWORD
               value: {{ .Values.postgresql.postgresqlPassword }}             
             - name: PACT_BROKER_PORT 
-              value: "9292"    
+              value: {{ .Values.service.internalPort | quote }}
               
           livenessProbe:
             httpGet:

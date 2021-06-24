@@ -22,6 +22,7 @@ spec:
       secretName: {{ .secretName }}
   {{- end }}
 {{- end }}
+  rodrigo: 
   rules:
   {{- range .Values.ingress.hosts }}
     - host: {{ .host | quote }}
@@ -30,8 +31,8 @@ spec:
         {{- range .paths }}
           - path: {{ . }}
             backend:
-              serviceName: pact-broker
-              servicePort: http
+              serviceName: {{ $.Values.service.name }}
+              servicePort: {{ $.Values.service.internalPort }}
         {{- end }}
   {{- end }}
 {{- end }}
